@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta content="Codescandy" name="author">
+      <title>{% block title %} {% endblock %}</title>
+      <!-- Favicon icon-->
+      <link rel="shortcut icon" type="image/x-icon" href="{% static 'main/favicon.ico' %}">
+
+      <!-- Libs CSS -->
+      <link href="{% static 'main/css/bootstrap-icons.min.css' %}" rel="stylesheet">
+      <link href="{% static 'main/css/feather-icons.css' %}" rel="stylesheet">
+      <link href="{% static 'main/css/simplebar.min.css' %}" rel="stylesheet">
+
+      <!-- Theme CSS -->
+      <link rel="stylesheet" href="{% static 'main/css/theme.min.css' %}">
+      <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-M8S4MT3EYG"></script>
+      <script>
+         window.dataLayer = window.dataLayer || [];
+         function gtag() {
+            dataLayer.push(arguments);
+         }
+         gtag("js", new Date());
+
+         gtag("config", "G-M8S4MT3EYG");
+      </script>
+</head>
+<body>
+    {% block navigation %}
+
+    {% endblock %}
+
+    {% block section %}
+
+    {% endblock %}
+
+    {% block footer %}
+
+    {% endblock %}
+
+    <script src="{% static 'main/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'main/js/simplebar.min.js' %}"></script>
+
+      <!-- Theme JS -->
+    <script src="{% static 'main/js/theme.min.js' %}"></script>
+
+    <script src="{% static 'main/js/password.js' %}"></script>
+    <script src="{% static 'main/js/validation.js' %}"></script>
+
+
+</body>
+</html>
