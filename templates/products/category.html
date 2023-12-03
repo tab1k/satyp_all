@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta content="Codescandy" name="author">
+      <title>Shop Grid eCommerce HTML Template - FreshCart</title>
+      <link href="{% static 'products/css/tiny-slider.css' %}" rel="stylesheet">
+      <link href="{% static 'products/css/nouislider.min.css' %}" rel="stylesheet">
+      <!-- Favicon icon-->
+      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+      <!-- Libs CSS -->
+      <link href="{% static 'products/css/bootstrap-icons.min.css' %}" rel="stylesheet">
+      <link href="{% static 'products/css/feather-icons.css' %}" rel="stylesheet">
+      <link href="{% static 'products/css/simplebar.min.css' %}" rel="stylesheet">
+
+      <!-- Theme CSS -->
+      <link rel="stylesheet" href="{% static 'products/css/theme.min.css' %}">
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.7.0/dist/js/bootstrap.bundle.min.js"></script>
+      <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-M8S4MT3EYG"></script>
+      <script>
+         window.dataLayer = window.dataLayer || [];
+         function gtag() {
+            dataLayer.push(arguments);
+         }
+         gtag("js", new Date());
+
+         gtag("config", "G-M8S4MT3EYG");
+      </script>
+   </head>
+<body>
+    <main>
+        {% block content %}
+            <div class="container mt-5">
+                <h2 class="mb-4">Подкатегории</h2>
+                <div class="row">
+                {% if categories %}
+                    {% for cat in categories %}
+                    <div class="col-lg-2 col-md-4 col-6 mb-4">
+                    <a href="{% url 'products:sub_category' cat.id %}" class="text-decoration-none text-inherit">
+                        <div class="card">
+                            <div class="card-body text-center py-6 text-center">
+                                <div class="my-5">
+                                    <svg width="56" height="56" fill="#3d4f58" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="{{ cat.image }}" fill-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <div class="text-truncate">{{ cat.name }}</div>
+                                <!-- Добавьте другие элементы товара по вашему выбору -->
+                            </div>
+                        </div>
+                    </a>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p>Пока подкатегорий и товаров нет!(</p>
+                {% endif %}
+                </div>
+            </div>
+        {% endblock %}
+    </main>
+</body>
+</html>

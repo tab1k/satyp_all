@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+      <!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta content="Codescandy" name="author">
+      <title>Shop Wishlist eCommerce HTML Template - FreshCart</title>
+      <!-- Favicon icon-->
+<link rel="shortcut icon" type="image/x-icon" href="{% static 'products/favicon.ico' %}">
+
+
+<!-- Libs CSS -->
+<link href="{% static 'products/css/bootstrap-icons.min.css' %}" rel="stylesheet">
+<link href="{% static 'products/css/feather-icons.css' %}" rel="stylesheet">
+<link href="{% static 'products/css/simplebar.min.css' %}" rel="stylesheet">
+
+
+<!-- Theme CSS -->
+<link rel="stylesheet" href="{% static 'products/css/theme.min.css' %}">
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-M8S4MT3EYG"></script>
+<script>
+   window.dataLayer = window.dataLayer || [];
+   function gtag() {
+      dataLayer.push(arguments);
+   }
+   gtag("js", new Date());
+
+   gtag("config", "G-M8S4MT3EYG");
+</script>
+
+   </head>
+
+   <body>
+
+
+      <main>
+         {% block content %}
+             <div class="mt-4">
+            <div class="container">
+               <!-- row -->
+               <div class="row">
+                  <!-- col -->
+                  <div class="col-12">
+                     <!-- breadcrumb -->
+                     <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0">
+                           <li class="breadcrumb-item"><a href="#!">Главная</a></li>
+                           <li class="breadcrumb-item"><a href="#!">Каталог</a></li>
+                           <li class="breadcrumb-item active" aria-current="page">Избранное</li>
+                        </ol>
+                     </nav>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- section -->
+         <section class="mt-8 mb-14">
+            <div class="container">
+               <!-- row -->
+               <div class="row">
+                  <div class="col-lg-12">
+                     <div class="mb-8">
+                        <!-- heading -->
+                        <h1 class="mb-1">Понравившиеся продукты</h1>
+                        <p>В вашем списке {{ favorites.count }} шт продуктов.</p>
+                     </div>
+                     <div>
+                        <!-- table -->
+                        <div class="table-responsive">
+                           <table class="table text-nowrap table-with-checkbox">
+                              <thead class="table-light">
+                                 <tr>
+                                    <th>
+                                       <!-- form check -->
+                                       <div class="form-check">
+                                          <!-- input -->
+                                          <input class="form-check-input" type="checkbox" value="" id="checkAll">
+                                          <!-- label -->
+                                          <label class="form-check-label" for="checkAll"></label>
+                                       </div>
+                                    </th>
+                                    <th></th>
+                                    <th>Продукт</th>
+                                    <th>Цена</th>
+                                    <th>Статус</th>
+                                    <th>Действия</th>
+                                    <th>Удалять</th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                {% for f in favorites %}
+                                 <tr>
+                                    <td class="align-middle">
+                                       <!-- form check -->
+                                       <div class="form-check">
+                                          <!-- input -->
+                                          <input class="form-check-input" type="checkbox" value="" id="chechboxTwo">
+                                          <!-- label -->
+                                          <label class="form-check-label" for="chechboxTwo"></label>
+                                       </div>
+                                    </td>
+                                    <td class="align-middle">
+                                       <a href="#"><img src="{{ f.product.image.url }}" class="icon-shape icon-xxl" alt=""></a>
+                                    </td>
+                                    <td class="align-middle">
+                                       <div>
+                                          <h5 class="fs-6 mb-0"><a href="#" class="text-inherit">{{ f.product.name }}</a></h5>
+                                       </div>
+                                    </td>
+                                    <td class="align-middle">{{ f.product.price }} тг.</td>
+                                    <td class="align-middle"><span class="badge bg-success">В наличии</span></td>
+                                    <td class="align-middle">
+                                       <div class="btn btn-primary btn-sm">В корзину</div>
+                                    </td>
+                                    <td class="align-middle">
+                                       <a href="#" class="text-muted" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                          <i class="feather-icon icon-trash-2"></i>
+                                       </a>
+                                    </td>
+                                 </tr>
+                                {% endfor %}
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+         {% endblock %}
+      </main>
+
+
+<script src="{% static 'account/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'account/js/simplebar.min.js' %}"></script>
+
+<!-- Theme JS -->
+<script src="{% static 'account/js/theme.min.js' %}"></script>
+
+   
+
+</body>
+</html>

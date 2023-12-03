@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponseNotFound, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.views import View
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from basket.models import Basket, Favorite
 from products.models import *
 
@@ -20,6 +20,8 @@ class ProductsView(ListView):
         context = super().get_context_data(**kwargs)
         # Добавление категорий в контекст
         context['category'] = ProductCategory.objects.all()
+        context['favorite'] = Favorite.objects.all()
+        context['basket'] = Basket.objects.all()
         context['product_id'] = self.kwargs.get('product_id')
         return context
 
@@ -38,11 +40,7 @@ class AddToBasket(View, LoginRequiredMixin):
             basket.quantity += 1
             basket.save()
 
-        context = {
-            'basket': Basket.objects.filter(user=request.user)
-        }
-
-        return render(request, 'products/shop-grid.html', context)
+        return redirect('products:shop-grid')
 
 
 class AddToFavorite(View, LoginRequiredMixin):
@@ -58,4 +56,31 @@ class AddToFavorite(View, LoginRequiredMixin):
             favorite.delete()
 
         return redirect('products:shop-grid')
+
+
+class CategoryListView(ListView):
+    model = ProductCategory
+    template_name = 'products/category.html'
+    context_object_name = 'categories'
+
+
+class SubCategoryListView(ListView):
+    model = SubCategory
+    template_name = 'products/sub_shop.html'
+    context_object_name = 'subcategories'
+
+    def get_queryset(self):
+        category_id = self.kwargs['category_id']
+        return SubCategory.objects.filter(category_id=category_id)
+
+
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'products/product_detail.html'
+    context_object_name = 'products'
+
+    def get_object(self, queryset=None):
+        product_id = self.kwargs['product_id']
+        return get_object_or_404(Product, id=product_id)
+
 

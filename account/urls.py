@@ -11,6 +11,8 @@ urlpatterns = [
     path("address/", UserAddressView.as_view(), name='address'),
     path("payment/", UserPaymentView.as_view(), name='payment'),
     path("notification/", UserNotificationView.as_view(), name='notification'),
+    path("wishlist/", WishlistView.as_view(), name='wishlist'),
+    path("cart/", UserCartView.as_view(), name='cart'),
     path('logout/', LogoutView.as_view(), name='logout'),
 
 ]
