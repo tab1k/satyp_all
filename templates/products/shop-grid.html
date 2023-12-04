@@ -302,7 +302,7 @@
                               <div class="me-2 flex-grow-1">
                                  <!-- select option -->
                                  <select class="form-select">
-                                    <option selected="">Show: 50</option>
+                                    <option selected="">Показать: 50</option>
                                     <option value="10">10</option>
                                     <option value="20">20</option>
                                     <option value="30">30</option>
@@ -311,11 +311,11 @@
                               <div>
                                  <!-- select option -->
                                  <select class="form-select">
-                                    <option selected="">Sort by: Featured</option>
-                                    <option value="Low to High">Price: Low to High</option>
-                                    <option value="High to Low">Price: High to Low</option>
-                                    <option value="Release Date">Release Date</option>
-                                    <option value="Avg. Rating">Avg. Rating</option>
+                                    <option selected="">Сортировать по: Рекомендуемые</option>
+                                    <option value="Low to High">Цена: по возрастанию</option>
+                                    <option value="High to Low">Цена: по убыванию</option>
+                                    <option value="Release Date">Дата выпуска</option>
+                                    <option value="Avg. Rating">Рейтинг</option>
                                  </select>
                               </div>
                            </div>
@@ -535,24 +535,27 @@
                         <div class="col">
                            <!-- nav -->
                            <nav>
-                              <ul class="pagination">
-                                 <li class="page-item disabled">
-                                    <a class="page-link mx-1" href="#" aria-label="Previous">
-                                       <i class="feather-icon icon-chevron-left"></i>
-                                    </a>
-                                 </li>
-                                 <li class="page-item"><a class="page-link mx-1 active" href="#">1</a></li>
-                                 <li class="page-item"><a class="page-link mx-1" href="#">2</a></li>
+                                <ul class="pagination">
+                                    <li class="page-item {% if page_obj.has_previous %} {% else %} disabled {% endif %}">
+                                        <a class="page-link mx-1" href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% endif %}" aria-label="Назад">
+                                            <i class="feather-icon icon-chevron-left"></i>
+                                        </a>
+                                    </li>
 
-                                 <li class="page-item"><a class="page-link mx-1" href="#">...</a></li>
-                                 <li class="page-item"><a class="page-link mx-1" href="#">12</a></li>
-                                 <li class="page-item">
-                                    <a class="page-link mx-1" href="#" aria-label="Next">
-                                       <i class="feather-icon icon-chevron-right"></i>
-                                    </a>
-                                 </li>
-                              </ul>
-                           </nav>
+                                    {% for page in paginator.page_range %}
+                                        <li class="page-item {% if page == page_obj.number %} active {% endif %}">
+                                            <a class="page-link mx-1" href="?page={{ page }}">{{ page }}</a>
+                                        </li>
+                                    {% endfor %}
+
+                                    <li class="page-item {% if not page_obj.has_next %} disabled {% endif %}">
+                                        <a class="page-link mx-1" href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% endif %}" aria-label="Вперед">
+                                            <i class="feather-icon icon-chevron-right"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+
                         </div>
                      </div>
                   </section>

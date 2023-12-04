@@ -41,6 +41,7 @@
                 {% if subcategories %}
                     {% for sub in subcategories %}
                     <div class="col-lg-2 col-md-4 col-6 mb-4">
+                        <a href="{% url 'products:products_by_subcategory' sub.id %}">
                         <div class="card">
                             <div class="card-body text-center py-6 text-center">
                                 <div class="my-5">
@@ -52,6 +53,7 @@
                                 <!-- Добавьте другие элементы товара по вашему выбору -->
                             </div>
                         </div>
+                        </a>
                     </div>
                     {% endfor %}
                 {% else %}

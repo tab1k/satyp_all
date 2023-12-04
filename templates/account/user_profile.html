@@ -116,25 +116,37 @@
                            <div class="row">
                               <div class="col-lg-5">
                                  <!-- form -->
-                                 <form>
+                                 <form method="post" action="{% url 'users:account:profile' user.id%}">
+                                     {% csrf_token %}
                                     <!-- input -->
                                     <div class="mb-3">
-                                       <label class="form-label">Имя</label>
-                                       <input type="text" class="form-control" placeholder="{{ user.first_name }} {{ user.last_name }}">
+                                       <label class="form-label" for="{{ form.first_name.id_for_label }}">Имя</label>
+                                       {{ form.first_name }}
                                     </div>
                                     <!-- input -->
                                     <div class="mb-3">
-                                       <label class="form-label">Email</label>
-                                       <input type="email" class="form-control" placeholder="{{ user.email }}">
+                                       <label class="form-label" for="{{ form.last_name.id_for_label }}">Фамилия</label>
+                                       {{ form.last_name }}
                                     </div>
                                     <!-- input -->
                                     <div class="mb-5">
-                                       <label class="form-label">Номер телефона</label>
-                                       <input type="text" class="form-control" placeholder="{{ user.phone_number }}">
+                                       <label class="form-label" for="{{ form.email.id_for_label }}">Email</label>
+                                       {{ form.email }}
                                     </div>
+
+                                     <div class="mb-5">
+                                       <label class="form-label" for="{{ form.phone_number.id_for_label }}">Номер телефона</label>
+                                       {{ form.phone_number }}
+                                    </div>
+
+                                     <div class="mb-5">
+                                       <label class="form-label" for="{{ form.age.id_for_label }}">Возраст</label>
+                                       {{ form.age }}
+                                    </div>
+
                                     <!-- button -->
                                     <div class="mb-3">
-                                       <button class="btn btn-primary">Сохранить</button>
+                                       <button type="submit" class="btn btn-primary">Сохранить</button>
                                     </div>
                                  </form>
                               </div>

@@ -1,23 +1,16 @@
-from django.shortcuts import render
-from django.views import View
-
+from django.views.generic import TemplateView
 from basket.models import Favorite, Basket
 from products.models import *
 
 
-class IndexView(View):
+class IndexView(TemplateView):
 
-    def get(self, request):
-        product = Product.objects.all()
-        category = ProductCategory.objects.all()
-        favorite = Favorite.objects.all()
-        basket = Basket.objects.all()
+    template_name = 'main/index.html'
 
-        context = {
-            'product' : product,
-            'category' : category,
-            'favorite' : favorite,
-            'basket' : basket,
-        }
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['product'] = Product.objects.all()
+        context['category'] = ProductCategory.objects.all()
+        context['favorite'] = Favorite.objects.all()
+        context['basket'] = Basket.objects.all()
 
-        return render(request, 'main/index.html', context)

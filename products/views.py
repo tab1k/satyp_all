@@ -1,24 +1,24 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseRedirect, HttpResponseNotFound, HttpResponseServerError
 from django.shortcuts import render, get_object_or_404, redirect
-from django.urls import reverse
 from django.views import View
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 from basket.models import Basket, Favorite
 from products.models import *
 
 
 class ProductsView(ListView):
+    model = Product
     template_name = 'products/shop-grid.html'
     context_object_name = 'products'
-    paginate_by = 10
+    paginate_by = 16
 
     def get_queryset(self):
-        return Product.objects.all()
+        queryset = super().get_queryset()
+        sub_category_id = self.kwargs.get('sub_category_id')
+        return queryset.filter(sub_category_id=sub_category_id) if sub_category_id else queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # Добавление категорий в контекст
         context['category'] = ProductCategory.objects.all()
         context['favorite'] = Favorite.objects.all()
         context['basket'] = Basket.objects.all()

@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from .forms import CustomUserCreationForm, CustomAuthenticationForm
+from django.contrib.messages.views import SuccessMessageMixin
 
 
 class SignInView(LoginView):
@@ -16,10 +17,11 @@ class SignInView(LoginView):
         return redirect('main:index')
 
 
-class SignUpView(CreateView):
+class SignUpView(SuccessMessageMixin, CreateView):
     form_class = CustomUserCreationForm
     template_name = 'users/signup.html'
     success_url = reverse_lazy('users:signin')
+    success_message = 'Вы успешно зарегистрировались!'
 
     def form_valid(self, form):
         user = form.save()

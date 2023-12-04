@@ -1,23 +1,30 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import DetailView, ListView
-
+from django.views.generic import ListView, UpdateView
+from account.forms import UserProfileForm
 from basket.models import Favorite, Basket
 from users.models import CustomUser
 
 
-class UserProfileView(DetailView):
+class UserProfileView(UpdateView, LoginRequiredMixin):
     model = CustomUser
+    form_class = UserProfileForm
     template_name = 'account/user_profile.html'
     context_object_name = 'user'
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def get_success_url(self):
+        return reverse_lazy('users:account:profile', args=[self.request.user.pk])
 
 
 class UserOrdersView(ListView):
     model = CustomUser
     template_name = 'account/user_orders.html'
     context_object_name = 'user'
-
 
 
 class UserAddressView(View):
