@@ -3,7 +3,6 @@
 {% load static %}
 <html lang="en">
 <head>
-      <!-- Required meta tags -->
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <meta content="Codescandy" name="author">
@@ -238,7 +237,7 @@
                                           <polyline points="2 17 12 22 22 17"></polyline>
                                           <polyline points="2 12 12 17 22 12"></polyline>
                                        </svg>
-                                       <span class="ms-3"><a style="color: black;" href="{% url 'products:category' %}">Категории</a></span>
+                                       <span class="ms-3"><a style="color: black;" href="{% url 'products:categories' %}">Категории</a></span>
                                     </h3>
                                  </div>
                               </div>
@@ -255,7 +254,7 @@
                                        {% for c in category %}
                                            <div class="item">
                                           <!-- item -->
-                                              <a href="{% url 'products:sub_category' c.id %}" class="text-decoration-none text-inherit">
+                                              <a href="{% url 'products:subcategories' c.id %}" class="text-decoration-none text-inherit">
                                                  <!-- card -->
                                                  <div class="card mb-3 card-lift">
                                                     <div class="card-body text-center py-6">
@@ -477,12 +476,13 @@
 
                          {% for p in products %}
                         <div class="col">
+
                            <!-- card -->
                            <div class="card card-product">
                               <div class="card-body">
                                  <!-- badge -->
                                  <div class="text-center position-relative">
-                                    <a href="{% url 'products:product' p.id %}"><img src="{{ p.image.url }}" alt="Grocery Ecommerce Template" class="mb-3 img-fluid"></a>
+                                    <a href="{% url 'products:products' p.sub_category.id %}"><img src="{{ p.image.url }}" alt="Grocery Ecommerce Template" class="mb-3 img-fluid"></a>
                                     <!-- action btn -->
                                     <div class="card-product-action">
                                        <a href="#!" class="btn-action" data-bs-toggle="modal" data-bs-target="#quickViewModal">

@@ -41,7 +41,7 @@
                 {% if subcategories %}
                     {% for sub in subcategories %}
                     <div class="col-lg-2 col-md-4 col-6 mb-4">
-                        <a href="{% url 'products:products_by_subcategory' sub.id %}">
+                        <a href="{% url 'products:products' sub.id %}">
                         <div class="card">
                             <div class="card-body text-center py-6 text-center">
                                 <div class="my-5">

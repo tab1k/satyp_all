@@ -5,4 +5,5 @@ app_name = 'main'
 
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),
+    path('shops/', ShopListView.as_view(), name='shops'),
 ]

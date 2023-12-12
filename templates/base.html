@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <meta content="Codescandy" name="author">
-      <title>{% block title %}{% endblock %}</title>
+      <title>{{ title }}</title>
       <link href="{% static 'main/css/tiny-slider.css' %}" rel="stylesheet">
       <link href="{% static 'main/css/slick.css' %}" rel="stylesheet">
       <link href="{% static 'main/css/slick-theme.css' %}" rel="stylesheet">
@@ -53,7 +53,7 @@
                   <div class="col-xxl-5 col-lg-5 d-none d-lg-block">
                      <form action="#">
                         <div class="input-group">
-                           <input class="form-control rounded" type="search" placeholder="Search for products">
+                           <input class="form-control rounded" type="search" placeholder="Искать продукты...">
                            <span class="input-group-append">
                               <button class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end" type="button">
                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
@@ -504,7 +504,7 @@
                             <a class="nav-link" href="{% url 'products:shop-grid' %}">Каталог</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'products:shop-grid' %}">Магазины</a>
+                            <a class="nav-link" href="{% url 'shop:shops' %}">Магазины</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Блог</a>
@@ -569,7 +569,7 @@
                      <div class="row align-items-center">
                         <div class="col-6 col-md-6 col-lg-7">
                            <div class="d-flex">
-                              <img src="images/product-img-1.jpg" alt="Ecommerce" class="icon-shape icon-xxl">
+                              <img src="{% static 'main/images/product-img-1.jpg' %}" alt="Ecommerce" class="icon-shape icon-xxl">
                               <div class="ms-3">
                                  <!-- title -->
                                  <a href="../pages/shop-single.html" class="text-inherit">
@@ -615,7 +615,7 @@
                      <div class="row align-items-center">
                         <div class="col-6 col-md-6 col-lg-7">
                            <div class="d-flex">
-                              <img src="images/product-img-2.jpg" alt="Ecommerce" class="icon-shape icon-xxl">
+                              <img src="{% static 'main/images/product-img-2.jpg' %}" alt="Ecommerce" class="icon-shape icon-xxl">
                               <div class="ms-3">
                                  <a href="../pages/shop-single.html" class="text-inherit">
                                     <h6 class="mb-0">NutriChoice Digestive</h6>
@@ -662,7 +662,7 @@
                      <div class="row align-items-center">
                         <div class="col-6 col-md-6 col-lg-7">
                            <div class="d-flex">
-                              <img src="images/product-img-3.jpg" alt="Ecommerce" class="icon-shape icon-xxl">
+                              <img src="{% static 'main/images/product-img-3.jpg' %}" alt="Ecommerce" class="icon-shape icon-xxl">
                               <div class="ms-3">
                                  <!-- title -->
                                  <a href="../pages/shop-single.html" class="text-inherit">
@@ -710,7 +710,7 @@
                      <div class="row align-items-center">
                         <div class="col-6 col-md-6 col-lg-7">
                            <div class="d-flex">
-                              <img src="images/product-img-4.jpg" alt="Ecommerce" class="icon-shape icon-xxl">
+                              <img src="{% static 'main/images/product-img-4.jpg' %}" alt="Ecommerce" class="icon-shape icon-xxl">
                               <div class="ms-3">
                                  <!-- title -->
                                  <!-- title -->
@@ -759,7 +759,7 @@
                      <div class="row align-items-center">
                         <div class="col-6 col-md-6 col-lg-7">
                            <div class="d-flex">
-                              <img src="images/product-img-5.jpg" alt="Ecommerce" class="icon-shape icon-xxl">
+                              <img src="{% static 'main/images/product-img-5.jpg' %}" alt="Ecommerce" class="icon-shape icon-xxl">
                               <div class="ms-3">
                                  <!-- title -->
                                  <a href="../pages/shop-single.html" class="text-inherit">
@@ -908,19 +908,19 @@
                      <ul class="list-inline mb-0">
                         <li class="list-inline-item text-dark">Payment Partners</li>
                         <li class="list-inline-item">
-                           <a href="#!"><img src="images/amazonpay.svg" alt=""></a>
+                           <a href="#!"><img src="{% static 'main/images/amazonpay.svg' %}" alt=""></a>
                         </li>
                         <li class="list-inline-item">
-                           <a href="#!"><img src="images/american-express.svg" alt=""></a>
+                           <a href="#!"><img src="{% static 'main/images/american-express.svg' %}" alt=""></a>
                         </li>
                         <li class="list-inline-item">
-                           <a href="#!"><img src="images/mastercard.svg" alt=""></a>
+                           <a href="#!"><img src="{% static 'main/images/mastercard.svg' %}" alt=""></a>
                         </li>
                         <li class="list-inline-item">
-                           <a href="#!"><img src="images/paypal.svg" alt=""></a>
+                           <a href="#!"><img src="{% static 'main/images/paypal.svg' %}" alt=""></a>
                         </li>
                         <li class="list-inline-item">
-                           <a href="#!"><img src="images/visa.svg" alt=""></a>
+                           <a href="#!"><img src="{% static 'main/images/visa.svg' %}" alt=""></a>
                         </li>
                      </ul>
                   </div>
@@ -928,10 +928,10 @@
                      <ul class="list-inline mb-0 text-lg-end text-center">
                         <li class="list-inline-item mb-2 mb-md-0 text-dark">Get deliveries with FreshCart</li>
                         <li class="list-inline-item ms-4">
-                           <a href="#!"><img src="images/appstore-btn.svg" alt="" style="width: 140px"></a>
+                           <a href="#!"><img src="{% static 'main/images/appstore-btn.svg' %}" alt="" style="width: 140px"></a>
                         </li>
                         <li class="list-inline-item">
-                           <a href="#!"><img src="images/googleplay-btn.svg" alt="" style="width: 140px"></a>
+                           <a href="#!"><img src="{% static 'main/images/googleplay-btn.svg' %}" alt="" style="width: 140px"></a>
                         </li>
                      </ul>
                   </div>

@@ -1,0 +1,364 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta content="Codescandy" name="author">
+      <title>Stor List eCommerce HTML Template - FreshCart</title>
+      <!-- Favicon icon-->
+      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+      <!-- Libs CSS -->
+      <link href="{% static 'shop/css/bootstrap-icons.min.cs' %}s" rel="stylesheet">
+      <link href="{% static 'shop/css/feather-icons.css' %}" rel="stylesheet">
+      <link href="{% static 'shop/css/simplebar.min.css' %}" rel="stylesheet">
+
+      <!-- Theme CSS -->
+      <link rel="stylesheet" href="{% static 'shop/css/theme.min.css' %}">
+      <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-M8S4MT3EYG"></script>
+      <script>
+         window.dataLayer = window.dataLayer || [];
+         function gtag() {
+            dataLayer.push(arguments);
+         }
+         gtag("js", new Date());
+
+         gtag("config", "G-M8S4MT3EYG");
+      </script>
+</head>
+
+   <body>
+
+      {% block content %}
+          <main>
+         <div class="mt-4">
+            <div class="container">
+               <!-- row -->
+               <div class="row">
+                  <!-- col -->
+                  <div class="col-12">
+                     <!-- breadcrumb -->
+                     <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0">
+                           <li class="breadcrumb-item"><a href="/">Главная</a></li>
+                           <li class="breadcrumb-item"><a href={% url 'shop:shops' %}>Магазины</a></li>
+                        </ol>
+                     </nav>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- section -->
+         <section class="mt-8">
+            <!-- container -->
+            <div class="container">
+               <!-- row -->
+               <div class="row">
+                  <div class="col-12">
+                     <!-- heading -->
+                     <div class="bg-light d-flex justify-content-between ps-md-10 ps-6 rounded">
+                        <div class="d-flex align-items-center">
+                           <h1 class="mb-0 fw-bold">Магазины</h1>
+                        </div>
+                        <div class="py-6">
+                           <!-- img -->
+                           <!-- img -->
+                           <img src="{% static 'shop/images/store-graphics.svg' %}" alt="" class="img-fluid">
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+         <section class="mt-6 mb-lg-14 mb-8">
+            <!-- container -->
+            <div class="container">
+               <!-- row -->
+               <div class="row">
+                  <div class="col-12">
+                     <div class="mb-4">
+                        <!-- title -->
+                        <h6>
+                           Сейчас у нас
+                           <span class="text-primary">36</span>
+                           поставщиков
+                        </h6>
+                     </div>
+                  </div>
+               </div>
+               <!-- row -->
+               <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 g-lg-4">
+               {% if shops %}
+                   {% for s in shops %}
+                  <div class="col">
+                     <div class="card flex-row p-8 card-product">
+                        <div>
+                           <img src="{{ s.image.url }}" alt="" class="rounded-circle icon-shape icon-xl">
+                        </div>
+                        <div class="ms-6">
+                           <h5 class="mb-1"><a href="{% url 'shop:detail' shop_id=s.id %}" class="text-inherit">{{ s.name }}</a></h5>
+                           <div class="small text-muted">
+                              <span>{{ s.type }}</span>
+                              <span class="mx-1">
+                                 <svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" fill="#C1C7C6" class="bi bi-circle-fill align-middle" viewBox="0 0 16 16">
+                                    <circle cx="8" cy="8" r="8"></circle>
+                                 </svg>
+                              </span>
+                           </div>
+                           <div class="py-3">
+                              <ul class="list-unstyled mb-0 small">
+                                  {% if s.delivery %}
+                                 <li>- Доставка</li>
+                                  {% endif %}
+                                 {% if s.pickup_available %}
+                                 <li>- Самовывоз</li>
+                                  {% endif %}
+                              </ul>
+                           </div>
+                           <div>
+                              <!-- badge -->
+                              <div class="badge text-bg-light border">7.5 mi away</div>
+                              <!-- badge -->
+                              <div class="badge text-bg-light border">In-store prices</div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                   {% endfor %}
+                {% else %}
+                    <h1 class="mb-3 mt-3">Магазинов нет</h1>
+               {% endif %}
+               </div>
+            </div>
+         </section>
+{#         <section class="mb-lg-14 mb-8">#}
+{#            <div class="container">#}
+{#               <div class="row">#}
+{#                  <div class="col-12">#}
+{#                     <div class="mb-6">#}
+{#                        <h3 class="mb-0">Недавно просмотренные</h3>#}
+{#                     </div>#}
+{#                  </div>#}
+{#               </div>#}
+{#               <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 g-lg-4">#}
+{#                  <div class="col">#}
+{#                     <div class="card flex-row p-8 card-product">#}
+{#                        <div>#}
+{#                           <!-- img -->#}
+{#                           <img src="{% static 'shop/images/stores-logo-4.svg' %}" alt="" class="rounded-circle icon-shape icon-xl">#}
+{#                        </div>#}
+{#                        <!-- content -->#}
+{#                        <div class="ms-6">#}
+{#                           <h5 class="mb-1"><a href="#!" class="text-inherit">Blinkit Store</a></h5>#}
+{#                           <div class="small text-muted">#}
+{#                              <span>Meal Kits</span>#}
+{#                              <span class="mx-1">#}
+{#                                 <svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" fill="#C1C7C6" class="bi bi-circle-fill align-middle" viewBox="0 0 16 16">#}
+{#                                    <circle cx="8" cy="8" r="8"></circle>#}
+{#                                 </svg>#}
+{#                              </span>#}
+{#                              <span>Prepared Meals</span>#}
+{#                              <span class="mx-1">#}
+{#                                 <svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" fill="#C1C7C6" class="bi bi-circle-fill align-middle" viewBox="0 0 16 16">#}
+{#                                    <circle cx="8" cy="8" r="8"></circle>#}
+{#                                 </svg>#}
+{#                              </span>#}
+{#                              <span>Organic</span>#}
+{#                           </div>#}
+{#                           <div class="py-3">#}
+{#                              <ul class="list-unstyled mb-0 small">#}
+{#                                 <li>Delivery</li>#}
+{#                                 <li>Pickup available</li>#}
+{#                              </ul>#}
+{#                           </div>#}
+{#                           <div>#}
+{#                              <!-- badge -->#}
+{#                              <div class="badge text-bg-light border">40.5 mi away</div>#}
+{#                           </div>#}
+{#                        </div>#}
+{#                     </div>#}
+{#                  </div>#}
+{#                  <div class="col">#}
+{#                     <!-- card -->#}
+{#                     <div class="card flex-row p-8 card-product">#}
+{#                        <div>#}
+{#                           <!-- img -->#}
+{#                           <img src="{% static 'shop/images/stores-logo-5.svg' %}" alt="" class="rounded-circle icon-shape icon-xl">#}
+{#                        </div>#}
+{#                        <!-- content -->#}
+{#                        <div class="ms-6">#}
+{#                           <h5 class="mb-1"><a href="#!" class="text-inherit">StoreFront Super Market</a></h5>#}
+{#                           <div class="small text-muted">#}
+{#                              <span>Groceries</span>#}
+{#                              <span class="mx-1">#}
+{#                                 <svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" fill="#C1C7C6" class="bi bi-circle-fill align-middle" viewBox="0 0 16 16">#}
+{#                                    <circle cx="8" cy="8" r="8"></circle>#}
+{#                                 </svg>#}
+{#                              </span>#}
+{#                              <span>Bakery</span>#}
+{#                           </div>#}
+{#                           <div class="py-3">#}
+{#                              <ul class="list-unstyled mb-0 small">#}
+{#                                 <li><span class="text-primary">Delivery by 11:30pm</span></li>#}
+{#                                 <li>Pickup available</li>#}
+{#                              </ul>#}
+{#                           </div>#}
+{#                           <div>#}
+{#                              <!-- badge -->#}
+{#                              <div class="badge text-bg-light border">28.1 mi away</div>#}
+{#                           </div>#}
+{#                        </div>#}
+{#                     </div>#}
+{#                  </div>#}
+{#                  <div class="col">#}
+{#                     <!-- card -->#}
+{#                     <div class="card flex-row p-8 card-product">#}
+{#                        <div>#}
+{#                           <!-- img -->#}
+{#                           <img src="{% static 'shop/images/stores-logo-6.svg' %}" alt="" class="rounded-circle icon-shape icon-xl">#}
+{#                        </div>#}
+{#                        <!-- content -->#}
+{#                        <div class="ms-6">#}
+{#                           <h5 class="mb-1"><a href="#!" class="text-inherit">BigBasket</a></h5>#}
+{#                           <div class="small text-muted">#}
+{#                              <span>Groceries</span>#}
+{#                              <span class="mx-1">#}
+{#                                 <svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" fill="#C1C7C6" class="bi bi-circle-fill align-middle" viewBox="0 0 16 16">#}
+{#                                    <circle cx="8" cy="8" r="8"></circle>#}
+{#                                 </svg>#}
+{#                              </span>#}
+{#                              <span>Deli</span>#}
+{#                           </div>#}
+{#                           <div class="py-3">#}
+{#                              <ul class="list-unstyled mb-0 small">#}
+{#                                 <li><span class="text-primary">Delivery by 10:30pm</span></li>#}
+{#                                 <li>Pickup available</li>#}
+{#                              </ul>#}
+{#                           </div>#}
+{#                           <div>#}
+{#                              <!-- badge -->#}
+{#                              <div class="badge text-bg-light border">7.5 mi away</div>#}
+{#                           </div>#}
+{#                        </div>#}
+{#                     </div>#}
+{#                  </div>#}
+{#                  <div class="col">#}
+{#                     <!-- card -->#}
+{#                     <div class="card flex-row p-8 card-product">#}
+{#                        <div>#}
+{#                           <!-- img -->#}
+{#                           <img src="{% static 'shop/images/stores-logo-7.svg' %}" alt="" class="rounded-circle icon-shape icon-xl">#}
+{#                        </div>#}
+{#                        <!-- content -->#}
+{#                        <div class="ms-6">#}
+{#                           <h5 class="mb-1"><a href="#!" class="text-inherit">Swiggy Instamart</a></h5>#}
+{#                           <div class="small text-muted">#}
+{#                              <span>Meal Kits</span>#}
+{##}
+{#                              <span class="mx-1">#}
+{#                                 <svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" fill="#C1C7C6" class="bi bi-circle-fill align-middle" viewBox="0 0 16 16">#}
+{#                                    <circle cx="8" cy="8" r="8"></circle>#}
+{#                                 </svg>#}
+{#                              </span>#}
+{#                              <span>Prepared Meals</span>#}
+{#                              <span class="mx-1">#}
+{#                                 <svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" fill="#C1C7C6" class="bi bi-circle-fill align-middle" viewBox="0 0 16 16">#}
+{#                                    <circle cx="8" cy="8" r="8"></circle>#}
+{#                                 </svg>#}
+{#                              </span>#}
+{#                              <span>Organic</span>#}
+{#                           </div>#}
+{#                           <div class="py-3">#}
+{#                              <ul class="list-unstyled mb-0 small">#}
+{#                                 <li>Delivery</li>#}
+{#                                 <li>Pickup available</li>#}
+{#                              </ul>#}
+{#                           </div>#}
+{#                           <div>#}
+{#                              <!-- badge -->#}
+{#                              <div class="badge text-bg-light border">40.5 mi away</div>#}
+{#                           </div>#}
+{#                        </div>#}
+{#                     </div>#}
+{#                  </div>#}
+{#                  <div class="col">#}
+{#                     <!-- card -->#}
+{#                     <div class="card flex-row p-8 card-product">#}
+{#                        <div>#}
+{#                           <!-- img -->#}
+{#                           <img src="{% static 'shop/images/stores-logo-8.svg' %}" alt="" class="rounded-circle icon-shape icon-xl">#}
+{#                        </div>#}
+{#                        <!-- content -->#}
+{#                        <div class="ms-6">#}
+{#                           <h5 class="mb-1"><a href="#!" class="text-inherit">Online Grocery Mart</a></h5>#}
+{#                           <div class="small text-muted">#}
+{#                              <span>Groceries</span>#}
+{#                              <span class="mx-1">#}
+{#                                 <svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" fill="#C1C7C6" class="bi bi-circle-fill align-middle" viewBox="0 0 16 16">#}
+{#                                    <circle cx="8" cy="8" r="8"></circle>#}
+{#                                 </svg>#}
+{#                              </span>#}
+{#                              <span>Bakery</span>#}
+{#                           </div>#}
+{#                           <div class="py-3">#}
+{#                              <ul class="list-unstyled mb-0 small">#}
+{#                                 <li><span class="text-primary">Delivery by 11:30pm</span></li>#}
+{#                                 <li>Pickup available</li>#}
+{#                              </ul>#}
+{#                           </div>#}
+{#                           <div>#}
+{#                              <!-- badge -->#}
+{#                              <div class="badge text-bg-light border">28.1 mi away</div>#}
+{#                           </div>#}
+{#                        </div>#}
+{#                     </div>#}
+{#                  </div>#}
+{#                  <div class="col">#}
+{#                     <!-- card -->#}
+{#                     <div class="card flex-row p-8 card-product">#}
+{#                        <div>#}
+{#                           <!-- img -->#}
+{#                           <img src="{% static 'shop/images/stores-logo-9.svg' %}" alt="" class="rounded-circle icon-shape icon-xl">#}
+{#                        </div>#}
+{#                        <!-- content -->#}
+{#                        <div class="ms-6">#}
+{#                           <h5 class="mb-1"><a href="#!" class="text-inherit">Spencers</a></h5>#}
+{#                           <div class="small text-muted">#}
+{#                              <span>Groceries</span>#}
+{#                              <span class="mx-1">#}
+{#                                 <svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" fill="#C1C7C6" class="bi bi-circle-fill align-middle" viewBox="0 0 16 16">#}
+{#                                    <circle cx="8" cy="8" r="8"></circle>#}
+{#                                 </svg>#}
+{#                              </span>#}
+{#                              <span>Deli</span>#}
+{#                           </div>#}
+{#                           <div class="py-3">#}
+{#                              <ul class="list-unstyled mb-0 small">#}
+{#                                 <li><span class="text-primary">Delivery by 10:30pm</span></li>#}
+{#                                 <li>Pickup available</li>#}
+{#                              </ul>#}
+{#                           </div>#}
+{#                           <div>#}
+{#                              <!-- badge -->#}
+{#                              <div class="badge text-bg-light border">7.5 mi away</div>#}
+{#                           </div>#}
+{#                        </div>#}
+{#                     </div>#}
+{#                  </div>#}
+{#               </div>#}
+{#            </div>#}
+{#         </section>#}
+      </main>
+      {% endblock %}
+
+
+      <script src="{% static 'shop/js/bootstrap.bundle.min.js' %}"></script>
+      <script src="{% static 'shop/js/simplebar.min.js' %}"></script>
+      <script src="{% static 'shop/js/theme.min.js' %}"></script>
+   
+
+</body>
+</html>

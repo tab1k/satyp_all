@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     "products.apps.ProductsConfig",
     "account.apps.AccountConfig",
     "basket.apps.BasketConfig",
+    "shop.apps.ShopConfig",
     "django_extensions",
 ]
 
@@ -118,22 +119,30 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# Путь к каталогу, в котором будут собраны статические файлы
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Добавьте это, чтобы Django знал, где искать статические файлы внутри приложений
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
+LOGIN_URL = 'users:signin'
+LOGOUT_REDIRECT_URL = 'users:signin'
+
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# SENDING EMAILS
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+
+
+
 
 # JAZZMIN SETTINGS
 

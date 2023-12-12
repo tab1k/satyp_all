@@ -7,7 +7,6 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <meta content="Codescandy" name="author">
-      <title>{% block title %}Homepage v4 - eCommerce HTML Template - FreshCart{% endblock %}</title>
       <link href="{% static 'main/css/tiny-slider.css' %}" rel="stylesheet">
       <link href="{% static 'main/css/slick.css' %}" rel="stylesheet">
       <link href="{% static 'main/css/slick-theme.css' %}" rel="stylesheet">
@@ -154,7 +153,7 @@
                                   <polyline points="2 17 12 22 22 17"></polyline>
                                   <polyline points="2 12 12 17 22 12"></polyline>
                                </svg>
-                               <span class="ms-3"><a style="color: black;" href="{% url 'products:category' %}">Категории</a></span>
+                               <span class="ms-3"><a style="color: black;" href="{% url 'products:categories' %}">Категории</a></span>
                             </h3>
                          </div>
                       </div>
@@ -167,27 +166,30 @@
                          <div class="position-relative">
                             <div class="slider-8-columns" id="slider-8-columns">
                                <!-- item -->
-
-                               {% for c in category %}
-                                   <div class="item">
-                                  <!-- item -->
-                                      <a href="{% url 'products:sub_category' c.id %}" class="text-decoration-none text-inherit">
-                                         <!-- card -->
-                                         <div class="card mb-3 card-lift">
-                                            <div class="card-body text-center py-6">
-                                               <!-- img -->
-                                               <div class="my-5">
-                                                  <svg width="56" height="56" fill="#3d4f58" xmlns="http://www.w3.org/2000/svg">
-                                                     <path d="{{ c.image }}" fill-rule="evenodd"></path>
-                                                  </svg>
-                                               </div>
-                                               <!-- text -->
-                                               <div class="text-truncate">{{ c.name }}</div>
-                                            </div>
-                                         </div>
-                                      </a>
-                                   </div>
-                               {% endfor %}
+                               {% if category %}
+                                   {% for c in category %}
+                                       <div class="item">
+                                      <!-- item -->
+                                          <a href="{% url 'products:subcategories' c.id %}" class="text-decoration-none text-inherit">
+                                             <!-- card -->
+                                             <div class="card mb-3 card-lift">
+                                                <div class="card-body text-center py-6">
+                                                   <!-- img -->
+                                                   <div class="my-5">
+                                                      <svg width="56" height="56" fill="#3d4f58" xmlns="http://www.w3.org/2000/svg">
+                                                         <path d="{{ c.image }}" fill-rule="evenodd"></path>
+                                                      </svg>
+                                                   </div>
+                                                   <!-- text -->
+                                                   <div class="text-truncate">{{ c.name }}</div>
+                                                </div>
+                                             </div>
+                                          </a>
+                                       </div>
+                                   {% endfor %}
+                               {% else %}
+                                    <p>No categories available.</p>
+                                {% endif %}
 
 
 

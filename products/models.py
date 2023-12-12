@@ -2,6 +2,9 @@ from django.db import models
 from django.utils.text import slugify
 from autoslug import AutoSlugField
 
+from shop.models import Shop
+
+
 class ProductCategory(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
@@ -37,6 +40,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to='products_images')
     slug = AutoSlugField(unique=True, blank=True, populate_from='name')
     sub_category = models.ForeignKey(to=SubCategory, on_delete=models.PROTECT, blank=True, null=True)
+    shop = models.ForeignKey(to=Shop, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -44,3 +48,5 @@ class Product(models.Model):
     class Meta:
         verbose_name = 'Продукт'
         verbose_name_plural = 'Продукты'
+
+

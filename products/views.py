@@ -6,27 +6,7 @@ from basket.models import Basket, Favorite
 from products.models import *
 
 
-class ProductsView(ListView):
-    model = Product
-    template_name = 'products/shop-grid.html'
-    context_object_name = 'products'
-    paginate_by = 16
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        sub_category_id = self.kwargs.get('sub_category_id')
-        return queryset.filter(sub_category_id=sub_category_id) if sub_category_id else queryset
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['category'] = ProductCategory.objects.all()
-        context['favorite'] = Favorite.objects.all()
-        context['basket'] = Basket.objects.all()
-        context['product_id'] = self.kwargs.get('product_id')
-        return context
-
-
-class AddToBasket(View, LoginRequiredMixin):
+class AddToBasket(View):
 
     def get(self, request, product_id):
         product = get_object_or_404(Product, id=product_id)
@@ -43,7 +23,7 @@ class AddToBasket(View, LoginRequiredMixin):
         return redirect('products:shop-grid')
 
 
-class AddToFavorite(View, LoginRequiredMixin):
+class AddToFavorite(View):
 
     def get(self, request, product_id):
         product = get_object_or_404(Product, id=product_id)
@@ -74,13 +54,33 @@ class SubCategoryListView(ListView):
         return SubCategory.objects.filter(category_id=category_id)
 
 
+class ProductsView(ListView):
+    model = Product
+    template_name = 'products/shop-grid.html'
+    context_object_name = 'products'
+    paginate_by = 16
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        sub_category_id = self.kwargs.get('sub_category_id')
+        return queryset.filter(sub_category=sub_category_id) if sub_category_id else queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['category'] = ProductCategory.objects.all()
+        context['favorite'] = Favorite.objects.all()
+        context['basket'] = Basket.objects.all()
+        context['sub_category_id'] = self.kwargs.get('sub_category_id')
+        return context
+
+
+
 class ProductDetailView(DetailView):
     model = Product
     template_name = 'products/product_detail.html'
     context_object_name = 'products'
 
-    def get_object(self, queryset=None):
-        product_id = self.kwargs['product_id']
-        return get_object_or_404(Product, id=product_id)
-
+    def get_queryset(self):
+        sub_category_id = self.kwargs['sub_category_id']
+        return Product.objects.filter(sub_category_id=sub_category_id)
 
