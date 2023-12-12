@@ -1,5 +1,6 @@
 from django.contrib.auth import login
 from django.contrib.auth.views import LoginView
+from django.http import HttpResponseBadRequest
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, TemplateView
@@ -37,13 +38,24 @@ class EmailVerificationView(TitleMixin, TemplateView):
     template_name = 'users/email_verification.html'
 
     def get(self, request, *args, **kwargs):
-        code = kwargs['code']
-        user = CustomUser.objects.get(email=kwargs['email'])
-        email_verification = EmailVerification.objects.filter(user=user, code=code)
-        if email_verification.exists():
-            user.is_verified_email = True
-            user.save()
-            return super(EmailVerificationView, self).get(request, *args, **kwargs)
+        email = self.kwargs.get('email')
+        code = self.kwargs.get('code')
+
+        if email is not None and code is not None:
+            try:
+                user = CustomUser.objects.get(email=email)
+                email_verification = EmailVerification.objects.filter(user=user, code=code)
+
+                if email_verification.exists():
+                    user.is_verified_email = True
+                    user.save()
+                    return super(EmailVerificationView, self).get(request, *args, **kwargs)
+                else:
+                    return render(request, 'main/index.html')
+            except CustomUser.DoesNotExist:
+                # Обработка случая, когда пользователя с указанным email не существует
+                return render(request, 'main/index.html')
         else:
-            return render(request, 'main/index.html')
+            # Обработка случая, когда email или code не были предоставлены
+            return HttpRespconseBadRequest("Email и code должны быть предоставлены в URL.")
 

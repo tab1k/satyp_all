@@ -7,5 +7,5 @@ urlpatterns = [
     path("signin/", SignInView.as_view(), name='signin'),
     path('signup/', SignUpView.as_view(), name='signup'),
     path('account/', include('account.urls')),
-    path('verify/<str:eemail>/<uuid:code>', EmailVerificationView.as_view(), name='email_verification'),
+    path('verify/<str:email>/<uuid:code>', EmailVerificationView.as_view(), name='email_verification'),
 ]
